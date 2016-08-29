@@ -1,0 +1,47 @@
+function (Requestor, _requestor) {
+
+  /**
+   * The {{{name}}} model module.
+   * @module model/{{{name}}}
+   * @version {{{version}}}
+   */
+
+  /**
+   * Constructs a new <code>{{{name}}}</code>.
+   * @alias module:model/{{{name}}}
+   * @class
+   */
+  function {{{name}}}() {
+
+  }
+
+  /**
+   * Constructs a <code>{{{name}}}</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/{{{name}}} } obj Optional instance to populate.
+   * @return {module:model/{{{name}}} } The populated <code>{{{name}}}</code> instance.
+   */
+  {{{name}}}.create = function(data, obj) {
+    if (data) {
+      obj = obj || new {{{name}}}();
+
+      {{#properties}}
+      if (data.hasOwnProperty('{{{name}}}')) {
+        obj['{{{name}}}'] = Requestor.convertToType(data['{{{name}}}'], '{{{type}}}');
+      }
+      {{/properties}}
+    }
+    return obj;
+  };
+
+  {{#properties}}
+    /**
+     * {{{description}}}
+     * @member { {{{type}}} } {{{name}}}
+     */
+    {{{../name}}}.prototype['{{{name}}}'] = undefined;
+  {{/properties}}
+
+  return {{{name}}};
+}

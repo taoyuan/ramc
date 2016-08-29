@@ -1,0 +1,64 @@
+/*jshint -W069 */
+"use strict";
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    return define(['superagent'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    return module.exports = factory(require(typeof window==="object" ? 'superagent/lib/client' : 'superagent'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.{{&moduleName}}) {
+      root.{{&moduleName}} = {};
+    }
+    return root.{{&moduleName}} = factory(root.superagent);
+  }
+}(this, function(superagent) {
+
+  function create(options) {
+    const exports = {};
+
+    // Requestor definition
+    const Requestor = ({{> requestor}})(superagent);
+    const requestor = new Requestor();
+
+    exports.Requestor = Requestor;
+    exports.requestor = requestor;
+
+    Object.keys(requestor).concat(Object.keys(Requestor.prototype)).forEach(function (name) {
+      if (typeof requestor[name] === 'function') {
+        exports[name] = function () {
+          return requestor[name].apply(requestor, arguments);
+        }
+      }
+    });
+
+    options && exports.configure(options);
+
+    // Models definitions
+    const models = {};
+    {{#models}}
+    models['{{{name}}}'] = ({{> model}})(Requestor, requestor);
+    {{/models}}
+
+    // Services definitions
+    {{#services}}
+    const {{{name}}} = ({{> service}})(Requestor, requestor);
+    {{/services}}
+
+    // Export models
+    exports.models = models;
+
+    // Export services
+    {{#services}}
+      exports.{{{name}}} = {{{name}}};
+    {{/services}}
+
+    exports.create = create;
+
+    return exports;
+  }
+
+  return create();
+}));

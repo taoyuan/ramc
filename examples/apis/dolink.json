@@ -1,0 +1,1183 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.1.0",
+    "title": "cloud-service-api"
+  },
+  "basePath": "/rest/v1",
+  "consumes": [
+    "application/json",
+    "application/x-www-form-urlencoded",
+    "application/xml",
+    "text/xml"
+  ],
+  "produces": [
+    "application/json",
+    "application/xml",
+    "text/xml",
+    "application/javascript",
+    "text/javascript"
+  ],
+  "paths": {
+    "/nodes": {
+      "get": {
+        "tags": [
+          "Node"
+        ],
+        "summary": "获取当前用户下所有 Node 列表",
+        "operationId": "Node.query",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "Node"
+        ],
+        "summary": "用户请求 Node 配对",
+        "operationId": "Node.claim",
+        "parameters": [
+          {
+            "name": "nodeId",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/nodes/{nodeId}": {
+      "delete": {
+        "tags": [
+          "Node"
+        ],
+        "summary": "删除指定 Node",
+        "operationId": "Node.remove",
+        "parameters": [
+          {
+            "name": "nodeId",
+            "in": "path",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/nodes/{nodeId}/activate": {
+      "get": {
+        "tags": [
+          "Node"
+        ],
+        "summary": "Node 请求激活",
+        "operationId": "Node.activate",
+        "parameters": [
+          {
+            "name": "nodeId",
+            "in": "path",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/nodes/{nodeId}/claim": {
+      "post": {
+        "tags": [
+          "Node"
+        ],
+        "summary": "用户请求 Node 配对 (nodeId 通过地址传递). 等同与 [POST] /nodes",
+        "operationId": "Node.claimWithPath",
+        "parameters": [
+          {
+            "name": "nodeId",
+            "in": "path",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/things": {
+      "get": {
+        "tags": [
+          "Thing"
+        ],
+        "summary": "获取当前用户下所有 Things 列表",
+        "operationId": "Thing.query",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/things/{thingId}": {
+      "get": {
+        "tags": [
+          "Thing"
+        ],
+        "summary": "获取指定 Thing",
+        "operationId": "Thing.queryById",
+        "parameters": [
+          {
+            "name": "thingId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/devices": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "获取当前用户下所有设备",
+        "operationId": "Device.query",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/devices/{deviceId}": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "获取指定设备",
+        "operationId": "Device.queryById",
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "删除指定设备",
+        "operationId": "Device.remove",
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/devices/data": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "获取当前用户设备的历史数据",
+        "operationId": "Device.findData",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Filter defining fields, where, include, order, offset, and limit",
+            "required": false,
+            "type": "string",
+            "format": "JSON"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/devices/{deviceId}/aliases": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "创建设备别名或备注",
+        "operationId": "Device.createAliases",
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "aliases",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/devices/data/count": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "获取当前用户设备的历史数据的总条数",
+        "operationId": "Device.findDataCount",
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "description": "Criteria to match model instances",
+            "required": false,
+            "type": "string",
+            "format": "JSON"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "获取当前用户",
+        "operationId": "user.me__get_users",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "修改当前用户信息",
+        "operationId": "user.update",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "新增用户",
+        "operationId": "user.create",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/users/me": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "获取当前用户",
+        "operationId": "user.me__get_users_me",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/users/info": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "获取用户其他信息(推送通道)",
+        "operationId": "user.getInfo",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/users/callback": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "设定用户回调地址",
+        "operationId": "user.setCallback",
+        "parameters": [
+          {
+            "name": "callback",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "清楚用户回调地址",
+        "operationId": "user.removeCallback",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/users/token": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "创建API AccessToken",
+        "operationId": "user.createAccessToken",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "清除API AccessToken",
+        "operationId": "user.revokeAccessToken",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/mqtt": {
+      "post": {
+        "tags": [
+          "mqtt"
+        ],
+        "summary": "发布消息到 MQTT Bus 上",
+        "operationId": "mqtt.publish",
+        "parameters": [
+          {
+            "name": "topic",
+            "in": "query",
+            "description": "主题, 例如: $cloud/topic",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "负载对象",
+            "required": false,
+            "schema": {
+              "description": "负载对象",
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/remcall/device/{deviceId}": {
+      "post": {
+        "tags": [
+          "remcall"
+        ],
+        "summary": "调用  Device 方法",
+        "operationId": "remcall.device",
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "method",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "params",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "format": "JSON"
+          },
+          {
+            "name": "reply",
+            "in": "formData",
+            "description": "是否需要等待调用返��?",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/remcall/device/{deviceId}/channel/{channelId}": {
+      "post": {
+        "tags": [
+          "remcall"
+        ],
+        "summary": "调用  Channel 方法",
+        "operationId": "remcall.channel",
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "method",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "params",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "format": "JSON"
+          },
+          {
+            "name": "reply",
+            "in": "formData",
+            "description": "是否需要等待调用返��?",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/stream/device/{deviceId}/channel/{channelId}/bill": {
+      "post": {
+        "tags": [
+          "stream"
+        ],
+        "summary": "post stream",
+        "operationId": "stream.bill",
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "data",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/apps/token": {
+      "post": {
+        "tags": [
+          "App"
+        ],
+        "summary": "获取app token",
+        "operationId": "App.token",
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_secret",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/apps/users": {
+      "post": {
+        "tags": [
+          "App"
+        ],
+        "summary": "开发者应用下创建用户",
+        "operationId": "App.create",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/App"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "get": {
+        "tags": [
+          "App"
+        ],
+        "summary": "获取应用下的所有用户",
+        "operationId": "App.getUsers",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Filter defining fields, where, include, order, offset, and limit",
+            "required": false,
+            "type": "string",
+            "format": "JSON"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/apps/users/login": {
+      "post": {
+        "tags": [
+          "App"
+        ],
+        "summary": "用户登录",
+        "operationId": "App.login",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/App"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/apps/users/{id}": {
+      "put": {
+        "tags": [
+          "App"
+        ],
+        "summary": "修改用户信息",
+        "operationId": "App.update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "data",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/App"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "get": {
+        "tags": [
+          "App"
+        ],
+        "summary": "根据用户ID获取应用下的用户",
+        "operationId": "App.getUserById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "App"
+        ],
+        "summary": "删除应用下指定用户",
+        "operationId": "App.remove",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/apps/users/count": {
+      "get": {
+        "tags": [
+          "App"
+        ],
+        "summary": "获取应用下的用户数量",
+        "operationId": "App.count",
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "description": "Criteria to match model instances",
+            "required": false,
+            "type": "string",
+            "format": "JSON"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/apps/developerApp": {
+      "get": {
+        "tags": [
+          "App"
+        ],
+        "summary": "获取用户下所有开发者应用",
+        "operationId": "App.findDeveloperApp",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Filter defining fields, where, include, order, offset, and limit",
+            "required": false,
+            "type": "string",
+            "format": "JSON"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "App"
+        ],
+        "summary": "创建开发者应用",
+        "operationId": "App.createDeveloperApp",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/App"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/apps/authorized/{appId}": {
+      "get": {
+        "tags": [
+          "App"
+        ],
+        "summary": "根据应用Id获取应用",
+        "operationId": "App.findAuthorizedAppById",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/apps/developerApp/{appId}": {
+      "delete": {
+        "tags": [
+          "App"
+        ],
+        "summary": "删除开发者应用",
+        "operationId": "App.removeDeveloperApp",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "App"
+        ],
+        "summary": "修改开发者应用",
+        "operationId": "App.updateDeveloperApp",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "data",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/App"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/apps/authorizedApp": {
+      "get": {
+        "tags": [
+          "App"
+        ],
+        "summary": "获取用户下的所有授权应用",
+        "operationId": "App.findAuthorizedApp",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Filter defining fields, where, include, order, offset, and limit",
+            "required": false,
+            "type": "string",
+            "format": "JSON"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/apps/authorizedApp/{appId}": {
+      "delete": {
+        "tags": [
+          "App"
+        ],
+        "summary": "取消授权应用",
+        "operationId": "App.removeAuthorizedApp",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "user": {
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "additionalProperties": false
+    },
+    "App": {
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "tags": [
+    {
+      "name": "Node"
+    },
+    {
+      "name": "Thing"
+    },
+    {
+      "name": "Device"
+    },
+    {
+      "name": "user"
+    },
+    {
+      "name": "mqtt"
+    },
+    {
+      "name": "remcall"
+    },
+    {
+      "name": "stream"
+    },
+    {
+      "name": "App"
+    }
+  ]
+}
