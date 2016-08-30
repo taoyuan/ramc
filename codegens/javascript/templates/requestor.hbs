@@ -164,15 +164,26 @@ function (superagent) {
    * @returns {Boolean} <code>true</code> if <code>param</code> represents a file.
    */
   Requestor.prototype.isFileParam = function(param) {
-    // fs.ReadStream in Node.js (but not in runtime like browserify)
-    if (typeof window === 'undefined' &&
-        typeof require === 'function' &&
-        require('fs') &&
-        param instanceof require('fs').ReadStream) {
+    if (!param || typeof param !== 'object') {
+      return false;
+    }
+
+    // fs.ReadStream
+    if (
+      typeof window === 'undefined' &&
+      typeof require === 'function' &&
+      typeof param.read === 'function' &&
+      typeof param.end === 'function' &&
+      typeof param.bytesRead === 'number'
+    ) {
       return true;
     }
-    // Buffer in Node.js
-    if (typeof Buffer === 'function' && param instanceof Buffer) {
+    // Buffer in Node.js (avoid webpack to pack Buffer)
+    // if (typeof Buffer === 'function' && param instanceof Buffer) {
+    if (
+      param.constructor && typeof param.constructor.isBuffer === 'function' &&
+      param.constructor.isBuffer(param)
+    ) {
       return true;
     }
     // Blob in browser
@@ -183,6 +194,7 @@ function (superagent) {
     if (typeof File === 'function' && param instanceof File) {
       return true;
     }
+
     return false;
   };
 
