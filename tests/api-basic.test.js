@@ -28,7 +28,7 @@ describe('Test Generated API', function () {
       assert.typeOf(auth.authenticate, 'function');
     });
 
-    it('Should have missing parameter error for calling Authenticate method with missing parameters', () => {
+    it('Should have missing parameter error for calling authenticate method with missing parameters', () => {
       assert.throws(() => {
         auth.authenticate(null, {
           email: 'w+test@28.io'
@@ -36,7 +36,7 @@ describe('Test Generated API', function () {
       }, /Missing the required parameter/);
     });
 
-    it('Should have invalid password for calling Authenticate method with wrong password', (done) => {
+    it('Should have invalid password for calling authenticate method with wrong password', (done) => {
       auth.authenticate('client_credentials', {
         email: 'w+test@28.io',
         password: 'foobartest'
@@ -49,7 +49,7 @@ describe('Test Generated API', function () {
       })
     });
 
-    it('Should have valid password for calling Authenticate method with correct password', (done) => {
+    it('Should have valid password for calling authenticate method with correct password', (done) => {
       auth.authenticate('client_credentials', {
         email: 'w+test@28.io',
         password: 'foobar',

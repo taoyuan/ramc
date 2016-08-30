@@ -34,6 +34,15 @@
       }
     });
 
+    Object.defineProperty(exports, 'Promise', {
+      get: function () {
+        return Requestor.Promise;
+      },
+      set: function (value) {
+        Requestor.Promise = value;
+      }
+    })
+
     options && exports.configure(options);
 
     // Models definitions
