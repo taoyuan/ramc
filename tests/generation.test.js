@@ -11,12 +11,14 @@ describe('Test Generation', function () {
   list.forEach(function (file) {
     file = 'tests/apis/' + file;
     it(file, function () {
-      var result = ramc.generate({
+      ramc.generate({
         moduleName: 'Test',
         host: 'api.com',
-        specFile: file
+        spec: file
+      }).then(function (result) {
+        assert(result.length);
+        assert(typeof(result[0].data), 'string');
       });
-      assert(typeof(result), 'string');
     });
   });
 });

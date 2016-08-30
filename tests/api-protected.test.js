@@ -10,9 +10,9 @@ var ramc = require('../lib/ramc');
 function createClient() {
   return ramc.generate({
     moduleName: 'Auth',
-    specFile: path.resolve('tests/apis/protected.json')
-  }).then(code => {
-    return eval(code);
+    spec: path.resolve('tests/apis/protected.json')
+  }).then(result => {
+    return eval(result[0].data);
   });
 }
 

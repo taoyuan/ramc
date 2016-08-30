@@ -16,11 +16,10 @@ describe('Test Generated API', function () {
     before(function () {
       /*jshint evil:true*/
       return ramc.generate({
-        specFile: path.resolve('tests/apis/auth.json')
-      }).then(code => {
-        var client = eval(code);
+        spec: path.resolve('tests/apis/auth.json')
+      }).then(result => {
+        var client = eval(result[0].data);
         client.configure('http://portal.28.io/api');
-        console.log(client.requestor);
         auth = new client.API();
       });
     });
