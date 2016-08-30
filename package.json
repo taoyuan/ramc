@@ -1,6 +1,6 @@
 {
   "name": "ramc",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A RESTful API Modeling Code generation.",
   "main": "lib/ramc.js",
   "bin": {
