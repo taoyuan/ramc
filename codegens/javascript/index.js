@@ -14,11 +14,16 @@ function JavascriptCodegen(generator) {
   this.context = generator.context;
   this.templates = generator.loadTemplates(__dirname + '/templates');
 
-  this.postprocessContext(this.context);
+  this.init(this.opts, this.context);
 }
 
-JavascriptCodegen.prototype.postprocessContext = function (context) {
+JavascriptCodegen.prototype.init = function (opts, context) {
   var utils = this.generator.utils;
+
+  if (!this.projectName) {
+    this.projectName = opts.projectName;
+  }
+
   if (!this.projectName && context.title) {
     this.projectName = _.kebabCase(utils.sanitizeName(context.title));
   }

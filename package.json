@@ -14,7 +14,7 @@
   "dependencies": {
     "bluebird": "^3.4.3",
     "commander": "^2.9.0",
-    "fs-extra": "^0.30.0",
+    "fs-extra-promise": "^0.4.0",
     "handlebars": "^4.0.5",
     "js-beautify": "~1.6.3",
     "jshint": "~2.9.3",

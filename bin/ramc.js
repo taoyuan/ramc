@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var fs = require('fs-extra');
+var fs = require('fs-extra-promise');
 var path = require('path');
 var program = require('commander');
 var ramc = require('../');
@@ -33,15 +33,9 @@ program
       lang: lang,
       spec: input,
       moduleName: module,
-      serviceName: service
-    }).then(files => {
-      fs.ensureDir(output, function (err) {
-        if (err) return console.error(err);
-        files.forEach(function (file) {
-          fs.writeFileSync(path.join(output, file.path), file.data, 'utf-8');
-        });
-      })
-    });
+      serviceName: service,
+      output: output
+    })
   });
 
 if (!process.argv.slice(2).length) {
