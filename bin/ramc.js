@@ -16,8 +16,8 @@ program
   .option('-o, --output [output]', 'where to write the generated files (current dir by default)')
   .option('-l, --lang [language]', 'client language to generate', 'javascript')
   .option('-p, --project-name [project]', 'project name (default is same as swagger title or module name)')
-  .option('-m, --module [module]', 'module for generated library', 'Client')
-  .option('-s, --service [service]', 'default service name for apis without tags provided', 'API')
+  .option('-m, --module [module]', 'module for generated library (default is "Client")')
+  .option('-s, --service [service]', 'default service name for apis without tags provided (default is "api")')
   .action(function(){
     if (!this.input) {
       this.outputHelp();
