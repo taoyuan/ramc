@@ -11,7 +11,7 @@ describe('Test Generated API', function () {
   describe('Test Generated code for the 28.io Auth API', function () {
     this.timeout(10000);
 
-    var auth;
+    var api;
 
     before(function () {
       /*jshint evil:true*/
@@ -20,24 +20,24 @@ describe('Test Generated API', function () {
       }).then(result => {
         var client = eval(result[0].data);
         client.configure('http://portal.28.io/api');
-        auth = new client.API();
+        api = client.api;
       });
     });
 
     it('Should have authenticate method', () => {
-      assert.typeOf(auth.authenticate, 'function');
+      assert.typeOf(api.authenticate, 'function');
     });
 
     it('Should have missing parameter error for calling authenticate method with missing parameters', () => {
       assert.throws(() => {
-        auth.authenticate(null, {
+        api.authenticate(null, {
           email: 'w+test@28.io'
         });
       }, /Missing the required parameter/);
     });
 
     it('Should have invalid password for calling authenticate method with wrong password', (done) => {
-      auth.authenticate('client_credentials', {
+      api.authenticate('client_credentials', {
         email: 'w+test@28.io',
         password: 'foobartest'
       }, (error) => {
@@ -50,7 +50,7 @@ describe('Test Generated API', function () {
     });
 
     it('Should have valid password for calling authenticate method with correct password', (done) => {
-      auth.authenticate('client_credentials', {
+      api.authenticate('client_credentials', {
         email: 'w+test@28.io',
         password: 'foobar',
       }, (error, result) => {

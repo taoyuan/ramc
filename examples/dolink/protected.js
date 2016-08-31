@@ -10,9 +10,8 @@ return ramc.generate({
   var client = eval(result[0].data);
 
   client.auth({accessToken: '78d8d59bb03d5e282871f7da318b9d20'})
-  var user = new client.user();
 
-  user.me(function (err, res) {
+  client.user.me(function (err, res) {
     if (err) return console.error(err);
     console.log(res.data);
   });

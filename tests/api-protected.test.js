@@ -22,7 +22,7 @@ describe('Test Protected', function () {
 
     it('Should have auth and getSecure methods', () => {
       createClient().then(client => {
-        var api = new client.API();
+        var api = client.api;
         assert.typeOf(api.auth, 'function');
         assert.typeOf(api.getSecure, 'function');
       });
@@ -34,7 +34,7 @@ describe('Test Protected', function () {
 
       before((done) => {
         createClient().then(client => {
-          var api = new client.API();
+          var api = client.api;
           api.auth('client_credentials', {
             email: 'w+test@28.io',
             password: 'foobar'
@@ -53,7 +53,7 @@ describe('Test Protected', function () {
             name: 'token',
             accessToken: data.access_token
           });
-          var api = new client.API();
+          var api = client.api;
           api.getSecure((error, result) => {
             assert.equal(result.statusCode, 200);
             done();
@@ -68,7 +68,7 @@ describe('Test Protected', function () {
             name: 'token',
             accessToken: data.access_token.slice(1)
           });
-          var api = new client.API();
+          var api = client.api;
           api.getSecure((error, res) => {
             assert.equal(error.response.statusCode, 401);
             assert.equal(res.data, undefined);
@@ -84,7 +84,7 @@ describe('Test Protected', function () {
             name: 'token',
             accessToken: data.access_token.slice(1)
           });
-          var api = new client.API();
+          var api = client.api;
           api.getSecure({token: data.access_token}, (error, res) => {
             assert.equal(res.statusCode, 200);
             done();
@@ -99,7 +99,7 @@ describe('Test Protected', function () {
             name: 'token',
             accessToken: data.access_token
           });
-          var api = new client.API();
+          var api = client.api;
           api.getSecure({token: data.access_token.slice(1)}, (error, res) => {
             assert.equal(error.response.statusCode, 401);
             assert.equal(res.data, undefined);

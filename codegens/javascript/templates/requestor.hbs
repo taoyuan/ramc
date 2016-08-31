@@ -91,7 +91,7 @@ function (superagent) {
   Requestor.prototype.removeAuth = function(name) {
     name = name || 'default';
     delete this.authentications[name];
-  }
+  };
 
   /**
    * Returns a string representation for an actual parameter.
@@ -301,6 +301,7 @@ function (superagent) {
     authNames.forEach(function(authName) {
       var auth = that.authentications[authName];
       if (!auth) return;
+      var data = {};
       switch (auth.type) {
         case 'basic':
           if (auth.username || auth.password) {
@@ -309,7 +310,6 @@ function (superagent) {
           break;
         case 'apiKey':
           if (auth.apiKey) {
-            var data = {};
             if (auth.apiKeyPrefix) {
               data[auth.name] = auth.apiKeyPrefix + ' ' + auth.apiKey;
             } else {
@@ -325,7 +325,6 @@ function (superagent) {
         case 'oauth2':
           if (auth.accessToken) {
             if (auth.name) {
-              var data = {};
               data[auth.name] = auth.accessToken;
               if (auth['in'] === 'query') {
                 request.query(data);

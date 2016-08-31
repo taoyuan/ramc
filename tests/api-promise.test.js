@@ -19,11 +19,11 @@ describe('Test with promise', function () {
       }).then(result => {
         var client = eval(result[0].data);
         client.Promise = require('bluebird');
-        api = new client.API();
+        api = client.api;
       });
     });
 
-    it.only('Should have authenticate method', () => {
+    it('Should have authenticate method', () => {
       return api.get({limit: 2}).then(res => {
         assert.lengthOf(res.data, 2);
         // console.log(res.data);
