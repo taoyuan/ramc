@@ -24,16 +24,14 @@ program
       process.exit(1);
     }
 
-    const module = this.module || 'Client';
-    const service = this.service || 'API';
     const output = this.output || process.cwd();
 
     ramc.generate({
       lang: this.lang,
       spec: this.input,
       projectName: this.projectName,
-      moduleName: module,
-      serviceName: service,
+      moduleName: this.module,
+      serviceName: this.service,
       output: output
     })
   });
