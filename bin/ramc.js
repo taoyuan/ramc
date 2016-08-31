@@ -15,6 +15,7 @@ program
   .option('-i, --input <input>', 'location of the swagger spec, as URL or file')
   .option('-o, --output [output]', 'where to write the generated files (current dir by default)')
   .option('-l, --lang [language]', 'client language to generate', 'javascript')
+  .option('-p, --project-name [project]', 'project name (default is same as swagger title or module name)')
   .option('-m, --module [module]', 'module for generated library', 'Client')
   .option('-s, --service [service]', 'default service name for apis without tags provided', 'API')
   .action(function(){
@@ -23,15 +24,14 @@ program
       process.exit(1);
     }
 
-    const lang = this.lang;
     const module = this.module || 'Client';
     const service = this.service || 'API';
-    const input = this.input;
     const output = this.output || process.cwd();
 
     ramc.generate({
-      lang: lang,
-      spec: input,
+      lang: this.lang,
+      spec: this.input,
+      projectName: this.projectName,
       moduleName: module,
       serviceName: service,
       output: output
