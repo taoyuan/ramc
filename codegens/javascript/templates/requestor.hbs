@@ -32,7 +32,6 @@ function (superagent) {
      * @default {}
      */
     this.defaultHeaders = {
-      'User-Agent': 'ramc'
     };
 
     /**
@@ -44,7 +43,7 @@ function (superagent) {
   }
 
   if (global.Promise) {
-    Requestor.Promise = global.Promise;  
+    Requestor.Promise = global.Promise;
   }
 
   Requestor.prototype.configure = function(options) {
@@ -54,7 +53,7 @@ function (superagent) {
     options = options || {};
 
     if (options.baseUrl) {
-      this.baseUrl = options.baseUrl;  
+      this.baseUrl = options.baseUrl;
     }
   };
 
@@ -68,7 +67,7 @@ function (superagent) {
     if (!data) {
       throw new Error('Authentication data is required');
     }
-    
+
     {{#auth}}
       if (!data.type) data.type = '{{{auth}}}';
     {{/auth}}
@@ -332,7 +331,7 @@ function (superagent) {
                 request.set(data);
               }
             } else {
-              request.set({'Authorization': 'Bearer ' + auth.accessToken});  
+              request.set({'Authorization': 'Bearer ' + auth.accessToken});
             }
           }
           break;
@@ -550,7 +549,7 @@ function (superagent) {
           if (err) {
             reject(err);
           } else {
-            resolve(res);  
+            resolve(res);
           }
         });
       });
