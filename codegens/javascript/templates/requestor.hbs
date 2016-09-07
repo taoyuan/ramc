@@ -104,6 +104,9 @@ function (superagent) {
     if (param instanceof Date) {
       return param.toJSON();
     }
+    if (typeof param === 'object') {
+      return JSON.stringify(param);
+    }
     return param.toString();
   };
 
