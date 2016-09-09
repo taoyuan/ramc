@@ -165,6 +165,23 @@ function (superagent) {
   };
 
   /**
+   * Chooses a content type from the given array, with 'reg' matched; i.e. return JSON for /json/ if included, otherwise return the first.
+   * @param {Array.<String>} contentTypes
+   * @returns {String} The chosen content type, preferring 'reg' matched.
+   */
+  Requestor.prototype.preferredMime = function(contentTypes, reg) {
+    if (reg instanceof RegExp) {
+      for (var i = 0; i < contentTypes.length; i++) {
+        if (reg.test(contentTypes[i])) {
+          return contentTypes[i];
+        }
+      }
+    }
+
+    return contentTypes[0];
+  };
+
+  /**
    * Checks whether the given parameter value represents file-like content.
    * @param param The parameter to check.
    * @returns {Boolean} <code>true</code> if <code>param</code> represents a file.
@@ -501,7 +518,7 @@ function (superagent) {
     // set request timeout
     request.timeout(this.timeout);
 
-    var contentType = this.jsonPreferredMime(contentTypes);
+    var contentType = this.preferredMime(contentTypes, bodyParam ? /json/ : /form/);
     if (contentType) {
       request.type(contentType);
     } else if (!request.header['Content-Type']) {
