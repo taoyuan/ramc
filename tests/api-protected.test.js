@@ -21,7 +21,7 @@ describe('Test Protected', function () {
     this.timeout(10000);
 
     it('Should have auth and getSecure methods', () => {
-      createClient().then(client => {
+      return createClient().then(client => {
         var api = client.api;
         assert.typeOf(api.auth, 'function');
         assert.typeOf(api.getSecure, 'function');
