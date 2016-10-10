@@ -167,6 +167,7 @@ function (superagent) {
   /**
    * Chooses a content type from the given array, with 'reg' matched; i.e. return JSON for /json/ if included, otherwise return the first.
    * @param {Array.<String>} contentTypes
+   * @param {RegExp} reg
    * @returns {String} The chosen content type, preferring 'reg' matched.
    */
   Requestor.prototype.preferredMime = function(contentTypes, reg) {
